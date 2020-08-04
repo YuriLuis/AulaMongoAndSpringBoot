@@ -2,24 +2,29 @@ package com.yuri.luis.model;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private String id;
 	private String name;
 	private String email;
-	private String senha;
+	private String password;
 	
 	public User() {
 		
 	}
 
-	public User(String id, String name, String email, String senha) {
+	public User(String id, String name, String email, String password) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.senha = senha;
+		this.password = password;
 	}
 
 	public String getId() {
@@ -46,12 +51,12 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
