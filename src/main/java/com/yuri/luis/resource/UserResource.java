@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.yuri.luis.dto.UserDTO;
+import com.yuri.luis.model.Post;
 import com.yuri.luis.model.User;
 import com.yuri.luis.service.UserService;
 
@@ -45,7 +46,8 @@ public class UserResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-
+	
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		userService.delete(id);
@@ -59,4 +61,11 @@ public class UserResource {
 		user = userService.update(user);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value="/{id}/posts", method=RequestMethod.GET)
+ 	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+		User obj = userService.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
+	
 }

@@ -3,30 +3,31 @@ package com.yuri.luis.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.yuri.luis.dto.AuthorDTO;
+
+@Document
 public class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private String id;
 	private String text;
 	private Date date;
+	private AuthorDTO authorComment;
 	
 	public Comment() {
 		
 	}
 
-	public Comment(String id, String text, Date date) {
+	public Comment(String id,String text, Date date, AuthorDTO authorComment) {
 		super();
 		this.id = id;
 		this.text = text;
 		this.date = date;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+		this.setAuthorComment(authorComment);
 	}
 
 	public String getText() {
@@ -44,6 +45,24 @@ public class Comment implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public AuthorDTO getAuthorComment() {
+		return authorComment;
+	}
+
+	public void setAuthorComment(AuthorDTO authorComment) {
+		this.authorComment = authorComment;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {
